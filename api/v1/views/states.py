@@ -28,7 +28,7 @@ def list_states():
 @app_views.route('/states', methods=['POST'], strict_slashes=False)
 def create_state():
     """ Create State instance """
-    bod_req = request.get_json() # create dictionary
+    bod_req = request.get_json()  # create dictionary
     if bod_req is None:
         abort(400, "Not a JSON")
     if "name" not in bod_req:
@@ -50,9 +50,6 @@ def validate_instance():
 @app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
 def retrieve_state(state_id):
     """ Retrieve State instance """
-    # st_instance = storage.get("State", state_id)
-    # if not st_instance:
-    #     abort(404)
     validate_instance()
     return jsonify(st_instance.to_dict())
 
@@ -60,9 +57,6 @@ def retrieve_state(state_id):
 @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
 def update_state(state_id):
     """ Update State instance """
-    # st_instance = storage.get("State", state_id)
-    # if not st_instance:
-    #     abort(404)
     validate_instance()
 
     bod_req = request.get_json()
@@ -81,9 +75,6 @@ def update_state(state_id):
                  strict_slashes=False)
 def delete_state(state_id):
     """ Delete State instance """
-    # st_instance = storage.get("State", state_id)
-    # if not st_instance:
-    #     abort(404)
     validate_instance()
     st_instance.delete()
     storage.save()
