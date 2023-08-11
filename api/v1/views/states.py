@@ -41,7 +41,7 @@ def create_state():
 
 
 # handling id's
-def validate_instance():
+def validate_instance(state_id):
     st_instance = storage.get("State", state_id)
     if not st_instance:
         abort(404)
@@ -50,14 +50,14 @@ def validate_instance():
 @app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
 def retrieve_state(state_id):
     """ Retrieve State instance """
-    validate_instance()
+    validate_instance(state_id)
     return jsonify(st_instance.to_dict())
 
 
 @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
 def update_state(state_id):
     """ Update State instance """
-    validate_instance()
+    validate_instance(state_id)
 
     bod_req = request.get_json()
     if bod_req is None:
@@ -75,7 +75,7 @@ def update_state(state_id):
                  strict_slashes=False)
 def delete_state(state_id):
     """ Delete State instance """
-    validate_instance()
+    validate_instance(state_id)
     st_instance.delete()
     storage.save()
     return make_response(jsonify({}), 200)
