@@ -84,7 +84,10 @@ class DBStorage:
         """
         if id and cls:
             obj_entries = self.all(cls)
-            search_obj = "{}.{}".format(cls.__name__, id)
+            if(type(cls) == str):
+                search_obj = "{}.{}".format(cls, id)
+            else:
+                search_obj = "{}.{}".format(cls.__name__, id)
             return obj_entries.get(search_obj)
         return None
 
