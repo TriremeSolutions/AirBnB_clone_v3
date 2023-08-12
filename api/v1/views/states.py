@@ -63,7 +63,7 @@ def update_state(state_id):
 
     for key, value in bod_req.items():
         # ignore 'created_at' and 'updated_at' key pairs
-        if key != 'created_at' and k != 'updated_at' and key != 'id':
+        if key != 'created_at' and key != 'updated_at' and key != 'id':
             setattr(st_instance, key, value)
     storage.save()
     return make_response(jsonify(st_instance.to_dict()), 200)
