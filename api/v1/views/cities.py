@@ -25,7 +25,7 @@ def list_cities(state_id):
     return jsonify([c.to_dict() for c in st_instance.cities])
 
 
-@app_views.route('/api/v1/states/<state_id>/cities', methods=['POST'],
+@app_views.route('/states/<state_id>/cities', methods=['POST'],
                  strict_slashes=False)
 def create_city(state_id):
     "Creates a new city instance in a State"
@@ -44,7 +44,7 @@ def create_city(state_id):
     # create new city instance
     cy_instance = City(**bod_req)
     # affix city instance to an existing state
-    setattr(city, 'state_id', state_id)
+    setattr(cy_instance, 'state_id', state_id)
     storage.new(cy_instance)
     # save
     storage.save()
