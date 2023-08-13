@@ -1,8 +1,5 @@
 #!/usr/bin/python3
-"""
-View for Place objects that handles all
-default RESTFul API actions:
-"""
+""" View for Place objects that handles all default RESTFul API actions """
 
 from api.v1.views import app_views
 from flask import jsonify
@@ -29,10 +26,10 @@ def handle_city_by_place(city_id):
         abort(404)
 
     if request.method == 'GET':
-    """ Retrieves the list of all Place instances """
-    # iterate through the list and append each item to a dictionary
-    # and return as json
-    return jsonify([p.to_dict() for p in cy_instance.places])
+        """ Retrieves the list of all Place instances """
+        # iterate through the list and append each item to a dictionary
+        # and return as json
+        return jsonify([p.to_dict() for p in cy_instance.places])
 
     if request.method == 'POST':
         "Creates a new place instance in a City"
