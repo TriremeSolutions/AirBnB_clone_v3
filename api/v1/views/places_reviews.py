@@ -55,7 +55,7 @@ def handle_place_by_reviews(place_id):
         return make_response(jsonify(rev_instance.to_dict()), 201)
 
 
-@app_views.route('/places/<place_id>', methods=['GET', 'PUT', 'DELETE'],
+@app_views.route('/review/<review_id>', methods=['GET', 'PUT', 'DELETE'],
                  strict_slashes=False)
 def handle_review_by_id(review_id):
     """
