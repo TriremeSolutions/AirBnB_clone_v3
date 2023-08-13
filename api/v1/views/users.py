@@ -35,7 +35,7 @@ def create_User():
         abort(400, 'Missing email')
     if "password" not in bod_req:
         abort(400, 'Missing password')
-    
+
     # always remember to import "User" from models
     usr_instance = User(**bod_req)
     storage.new(usr_instance)
