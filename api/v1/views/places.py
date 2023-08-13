@@ -88,7 +88,7 @@ def handle_place_by_id(place_id):
             if key not in ignore_keys:
                 setattr(plc_instance, key, value)
         storage.save()
-        return make_response(jsonify(cy_instance.to_dict()), 200)
+        return make_response(jsonify(plc_instance.to_dict()), 200)
 
     if request.method == 'DELETE':
         """ Delete Place instance """
