@@ -1,9 +1,6 @@
 #!/usr/bin/python3
 """
-This module instantiates:
-An object of class FileStorage
-OR
-A database storage engine if env variable is "db"
+initialize the models package
 """
 
 from os import getenv
