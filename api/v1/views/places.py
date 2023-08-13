@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 """
-View for Place objects that handles all default RESTFul API actions:
+View for Place objects that handles all
+default RESTFul API actions:
 """
+
 from api.v1.views import app_views
 from flask import jsonify
 from flask import make_response, abort
