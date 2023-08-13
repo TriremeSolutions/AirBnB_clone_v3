@@ -9,7 +9,7 @@ from flask import make_response, abort
 from flask import request
 import models
 from models import storage
-from models.amenities import Amenity
+from models.amenity import Amenity
 
 
 # we could as well combine methods, e.g. methods=['GET','POST' etc...] and
