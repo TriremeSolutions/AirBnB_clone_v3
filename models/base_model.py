@@ -52,11 +52,11 @@ class BaseModel:
     def to_dict(self):
         """returns a dictionary containing all keys/values of the instance"""
         dictionary = self.__dict__.copy()
-        dictionary.update({'__class__':self.__class__.__name__})
+        dictionary.update({'__class__': self.__class__.__name__})
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
         dictionary.pop("_sa_instance_state", None)
-        # remove password except when used by fileStorage 
+        # remove password except when used by fileStorage
         if getenv("HBNB_TYPE_STORAGE") == "db":
             if "password" in dictionary:
                 del dictionary["password"]
