@@ -24,7 +24,7 @@ def list_place_amenities(place_id):
     plc_instance = storage.get("Place", place_id)
     if not plc_instance:
         abort(404)
-    
+
     if getenv('HBNB_TYPE_STORAGE') == 'db':
         ams = [s.to_dict() for s in plc_instance.amenities]
     else:
