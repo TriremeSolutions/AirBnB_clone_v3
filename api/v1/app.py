@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 """Script runs flask, imports blueprint"""
 from flask import Flask
-from flask import make_response
 from flask import jsonify
-from os import getenv
+from flask import make_response
+from flask_cors import CORS
 import models
 from models import storage
+from os import getenv
 from api.v1.views import app_views
 
 # app, instance of flask
@@ -13,6 +14,10 @@ app = Flask(__name__)
 
 # register blueprint to app instance
 app.register_blueprint(app_views)
+
+# Update api/v1/app.py to create a CORS
+# instance allowing: /* for 0.0.0.0
+CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 
 # declare a method to handle
 # @app.teardown_appcontext that calls storage.close()
