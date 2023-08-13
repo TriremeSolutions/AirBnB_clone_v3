@@ -26,7 +26,7 @@ def handle_city_by_place(city_id):
     if not cy_instance:
         abort(404)
 
-    if request.method == 'GET'
+    if request.method == 'GET':
     """ Retrieves the list of all Place instances """
     # iterate through the list and append each item to a dictionary
     # and return as json
