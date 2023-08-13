@@ -31,8 +31,11 @@ def create_User():
     bod_req = request.get_json()  # create dictionary
     if bod_req is None:
         abort(400, "Not a JSON")
-    if "name" not in bod_req:
-        abort(400, "Missing name")
+    if "email" not in bod_req:
+        abort(400, 'Missing email')
+    if "password" not in bod_req:
+        abort(400, 'Missing password')
+    
     # always remember to import "User" from models
     usr_instance = User(**bod_req)
     storage.new(usr_instance)
