@@ -152,22 +152,29 @@ def places_search():
     # If amenities list is not empty, limit search results
     # to only Place objects having all Amenity ids listed
 
-    amn_list = []
-    if amn and len(amn) > 0:
-        # create a set of containing valid amenity instances
-        amn = set([
-            x for x in amn if storage.get('Amenity', x)])
-        for plc in plc_list:
-            plc_amn = None
-            if STORAGE_TYPE == 'db' and plc.amenities:
-                plc_amn = [x for y in plc.amenities]
-            elif len(plc.amenities) > 0:
-                plc_amn = plc.amenities
-            # check for matching amenity instances
-            if plc_amn and all([y in plc_amn for y in amn]):
-                amn_list.append(plc)
-    else:
-        amn_list = plc_list
+    if amn:
+        # create list of valid amenity instances
+        amn_list = [storage.get("Amenity", n) for n in amn]
+        count = 0
+        limit = len(plc_list)
+        HBNB_API_HOST = getenv('HBNB_API_HOST')
+        HBNB_API_PORT = getenv('HBNB_API_PORT')
 
-    # the proactive else:
-    return jsonify([xy.to_dict() for xy in plc_list])
+        port = 5000 if not HBNB_API_PORT else HBNB_API_PORT
+        url = "http://0.0.0.0:{}/api/v1/places/".format(port)
+        while count < limit:
+            place = plc_list[count]
+            url = url + '{}/amenities'
+            req = url.format(place.id)
+            res = requests.get(req)
+            jlod = json.loads(res.text)
+            amen = [storage.get("Amenity", x['id']) for x in jlod]
+            for a in amn_list:
+                if a not in amen:
+                    plc_list.pop(count)
+                    count -= 1
+                    limit -= 1
+                    break
+            count += 1
+    # the proactive else
+    return jsonify([p.to_dict() for p in plc_list])
